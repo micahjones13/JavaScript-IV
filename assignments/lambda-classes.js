@@ -24,6 +24,17 @@ class Instructor extends Person {
     grade(studentObj, subject){
         return console.log(`${studentObj.name} receives a perfect score on ${subject}`);
     }
+    changeGrade(studentObj){
+        let rand = Math.random();
+        if(rand >= .5){
+            studentObj.grade += 10;
+            return console.log(`${studentObj.name} grade was changed to ${studentObj.grade}`);
+        }
+        else{
+            studentObj.grade -= 10;
+            return console.log(`${studentObj.name} grade was changed to ${studentObj.grade}`);
+        }
+    }
 }
 
 class Student extends Person {
@@ -32,6 +43,7 @@ class Student extends Person {
         this.previousBackground = studentAttributes.previousBackground;
         this.className = studentAttributes.className;
         this.favSubjects = studentAttributes.favSubjects;
+        this.grade = studentAttributes.grade;
     }
     listsSubjects(){
         return console.log(this.favSubjects);
@@ -41,6 +53,14 @@ class Student extends Person {
     }
     sprintChallenge(subject){
         return  console.log(`${this.name} has begun sprint challenge on ${subject}`);
+    }
+    graduate(){
+        if (this.grade >= 70){
+            return console.log(`${this.name} can graduate!`);
+        }
+        else{
+            return console.log(`${this.name} only has a grade of ${this.grade}, you need higher!`);
+        }
     }
 }
 
@@ -76,6 +96,7 @@ const fred = new Instructor({
     favSubjects: [
         'CSS', 'JS', 'HTML',
     ],
+    grade: 50,
   })
   const josh = new ProjectManager ({
     name: 'Joshua',
@@ -98,3 +119,8 @@ const fred = new Instructor({
   console.log(josh.debugsCode(micah, 'CSS'));
   console.log(micah.speak());
   console.log(fred.speak());
+  console.log(micah.grade);
+  console.log(josh.changeGrade(micah));
+  console.log(josh.changeGrade(micah));
+  console.log(josh.changeGrade(micah));
+  console.log(micah.graduate());
